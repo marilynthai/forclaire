@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Will you be my Valentine?</title>
+  <title>Claire, Will You Be My Valentine?</title>
 
   <!-- Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <style>
     :root {
-      --bg1: #ffd6e7;
-      --bg2: #ffeef6;
-      --card: #ffffffcc;
-      --yes: #ff3b7a;
-      --yesHover: #ff1f68;
+      --bg1: #2d5016;
+      --bg2: #3d6b1f;
+      --card: #f5f1e8cc;
+      --yes: #6ba82a;
+      --yesHover: #558a1f;
     }
 
     * { box-sizing: border-box; }
@@ -57,9 +57,21 @@
       filter: drop-shadow(0 10px 14px rgba(0,0,0,.12));
     }
 
+    .art.running {
+      animation: deerRun 0.6s ease-in-out;
+    }
+
+    @keyframes deerRun {
+      0%, 100% { transform: translateX(0) scaleY(1); }
+      25% { transform: translateX(8px) scaleY(0.98); }
+      50% { transform: translateX(0) scaleY(1); }
+      75% { transform: translateX(-8px) scaleY(0.98); }
+    }
+
     h1 {
       font-size: clamp(26px, 4vw, 44px);
       margin: 12px 0 18px;
+      color: #1a3a0a;
     }
 
     .button-zone {
@@ -91,18 +103,19 @@
       background: var(--yes);
       color: #fff;
     }
-    #yesBtn:hover { background: var(--yesHover); }
+    #yesBtn:hover { background: var(--yesHover); transform: translateY(-50%) scale(1.05); }
 
     #noBtn {
       left: 62%;
-      background: #e5e7eb;
-      color: #111827;
+      background: #d4b896;
+      color: #3d2f1f;
     }
 
     .hint {
       margin-top: 10px;
       font-size: 13px;
       opacity: .7;
+      color: #2d5016;
     }
 
     .result {
@@ -137,41 +150,78 @@
     <svg class="art" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="fur" x1="0" x2="1">
-          <stop offset="0" stop-color="#f7c7a1"/>
-          <stop offset="1" stop-color="#f2a97b"/>
+          <stop offset="0" stop-color="#9b7863"/>
+          <stop offset="1" stop-color="#7a5d47"/>
         </linearGradient>
         <linearGradient id="heart" x1="0" x2="1">
-          <stop offset="0" stop-color="#ff4d7d"/>
-          <stop offset="1" stop-color="#ff1f68"/>
+          <stop offset="0" stop-color="#6ba82a"/>
+          <stop offset="1" stop-color="#558a1f"/>
         </linearGradient>
       </defs>
 
-      <path d="M250 50 C250 33 270 25 282 38
-               C294 25 314 33 314 50
-               C314 78 282 92 282 106
-               C282 92 250 78 250 50Z"
+      <!-- Left Deer -->
+      <!-- Head -->
+      <ellipse cx="90" cy="110" rx="32" ry="38" fill="url(#fur)"/>
+      <!-- Ears -->
+      <path d="M70 65 Q60 45 65 30 Q72 40 75 55 Z" fill="url(#fur)"/>
+      <path d="M110 65 Q120 45 115 30 Q108 40 105 55 Z" fill="url(#fur)"/>
+      <!-- Eyes -->
+      <circle cx="80" cy="105" r="4" fill="#1a0f0a"/>
+      <circle cx="100" cy="105" r="4" fill="#1a0f0a"/>
+      <circle cx="81" cy="104" r="1.5" fill="#fff"/>
+      <circle cx="101" cy="104" r="1.5" fill="#fff"/>
+      <!-- Nose -->
+      <ellipse cx="90" cy="125" rx="3" ry="4" fill="#5a483a"/>
+      <!-- Mouth -->
+      <path d="M90 125 L85 130 M90 125 L95 130" stroke="#5a483a" stroke-width="1" fill="none" stroke-linecap="round"/>
+      <!-- Antlers left -->
+      <path d="M75 60 L70 40 M75 60 L65 35" stroke="url(#fur)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Antlers right -->
+      <path d="M105 60 L110 40 M105 60 L115 35" stroke="url(#fur)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Body -->
+      <ellipse cx="90" cy="155" rx="28" ry="35" fill="url(#fur)"/>
+      <!-- Legs -->
+      <rect x="75" y="180" width="6" height="35" fill="url(#fur)" rx="3"/>
+      <rect x="95" y="180" width="6" height="35" fill="url(#fur)" rx="3"/>
+      <!-- White tail spot -->
+      <circle cx="90" cy="188" r="6" fill="#f5f1e8"/>
+
+      <!-- Heart floating between deers -->
+      <path d="M160 45 C160 35 170 30 177 38
+               C184 30 194 35 194 45
+               C194 65 177 75 177 85
+               C177 75 160 65 160 45Z"
             fill="url(#heart)"/>
 
-      <path d="M90 120 C90 70 140 40 190 60
-               C240 40 290 70 290 120
-               C290 180 240 210 190 210
-               C140 210 90 180 90 120Z"
-            fill="url(#fur)"/>
-
-      <path d="M110 92 L95 55 L140 78 Z" fill="#f2a97b"/>
-      <path d="M270 92 L285 55 L240 78 Z" fill="#f2a97b"/>
-
-      <circle cx="160" cy="130" r="8"/>
-      <circle cx="220" cy="130" r="8"/>
-
-      <path d="M190 144 C186 144 182 148 182 152
-               C182 160 190 164 190 170
-               C190 164 198 160 198 152
-               C198 148 194 144 190 144Z"
-            fill="#ff7aa2"/>
+      <!-- Right Deer -->
+      <!-- Head -->
+      <ellipse cx="230" cy="110" rx="32" ry="38" fill="url(#fur)"/>
+      <!-- Ears -->
+      <path d="M210 65 Q200 45 205 30 Q212 40 215 55 Z" fill="url(#fur)"/>
+      <path d="M250 65 Q260 45 255 30 Q248 40 245 55 Z" fill="url(#fur)"/>
+      <!-- Eyes -->
+      <circle cx="220" cy="105" r="4" fill="#1a0f0a"/>
+      <circle cx="240" cy="105" r="4" fill="#1a0f0a"/>
+      <circle cx="221" cy="104" r="1.5" fill="#fff"/>
+      <circle cx="241" cy="104" r="1.5" fill="#fff"/>
+      <!-- Nose -->
+      <ellipse cx="230" cy="125" rx="3" ry="4" fill="#5a483a"/>
+      <!-- Mouth -->
+      <path d="M230 125 L225 130 M230 125 L235 130" stroke="#5a483a" stroke-width="1" fill="none" stroke-linecap="round"/>
+      <!-- Antlers left -->
+      <path d="M215 60 L210 40 M215 60 L205 35" stroke="url(#fur)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Antlers right -->
+      <path d="M245 60 L250 40 M245 60 L255 35" stroke="url(#fur)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Body -->
+      <ellipse cx="230" cy="155" rx="28" ry="35" fill="url(#fur)"/>
+      <!-- Legs -->
+      <rect x="215" y="180" width="6" height="35" fill="url(#fur)" rx="3"/>
+      <rect x="235" y="180" width="6" height="35" fill="url(#fur)" rx="3"/>
+      <!-- White tail spot -->
+      <circle cx="230" cy="188" r="6" fill="#f5f1e8"/>
     </svg>
 
-    <h1>nirali will you be my valentine?</h1>
+    <h1>Claire, will you be my valentine? 🦌</h1>
 
     <section class="button-zone" id="zone">
       <button id="yesBtn">Yes</button>
@@ -217,6 +267,9 @@
       resize: false,
       useWorker: true
     });
+
+    const artEl = document.querySelector('.art');
+    let deerRunTimeout;
 
     function fullScreenConfetti() {
       const end = Date.now() + 1600;
@@ -274,6 +327,14 @@
       noBtn.style.left = newLeft + "px";
       noBtn.style.top = newTop + "px";
       noBtn.style.transform = "none";
+
+      // Make deers run
+      artEl.classList.remove('running');
+      clearTimeout(deerRunTimeout);
+      artEl.classList.add('running');
+      deerRunTimeout = setTimeout(() => {
+        artEl.classList.remove('running');
+      }, 600);
 
       growYes();
     }
